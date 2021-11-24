@@ -1,0 +1,28 @@
+%table.ui.very.basic.table
+  %thead
+    %tr
+      %th Description
+      %th Quantity
+      %th Unit Amount
+      %th Total
+      %th/
+
+  %tbody
+    - invoice.line_items.each do |li|
+      %tr
+        %td= li.description
+        %td= li.quantity
+        %td= li.unit_amount.format
+        %td= li.subtotal.format
+        - if li.persisted?
+          %td= link_to 'Edit', edit_line_item_path(li)
+        - else
+          %td/
+
+  %tfoot
+    %tr
+      %td Total
+      %td/
+      %td/
+      %td= invoice.total.format
+      %td/

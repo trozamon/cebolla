@@ -1,0 +1,106 @@
+%head
+  %title Invoice ##{@invoice.number}
+  :css
+    body {
+      padding: 1em;
+      background-color: #FFF;
+    }
+
+    .centered {
+      text-align: center;
+    }
+
+    .date-table {
+      width: 100%;
+      margin-bottom: 1em;
+    }
+
+    .date-table th, .date-table td {
+      text-align: left;
+      padding: 0.5em;
+    }
+
+    .line-item-table {
+      width: 100%;
+      margin-bottom: 1em;
+      border-collapse: collapse;
+    }
+
+    tfoot td {
+      font-weight: bold;
+    }
+
+    .line-item-table th, .line-item-table td {
+      padding: 0.5em;
+    }
+
+    .line-item-table th {
+      text-align: center;
+      border-bottom: 2px solid black;
+    }
+
+    .line-item-table td {
+      text-align: left;
+      border-bottom: 2px solid #BBB;
+    }
+
+    .line-item-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .line-item-table tfoot td {
+      border-top: 2px solid black;
+      border-bottom: none;
+    }
+
+    td.number {
+      text-align: right
+    }
+
+%body
+  = @invoice.entity.name
+
+  %h1.centered Invoice ##{@invoice.number}
+
+  %table.date-table
+    %thead
+      %tr
+        %th Bill To
+        %th Date
+        %th Due Date
+    %tbody
+      %tr
+        %td
+          #{@invoice.customer.name}
+
+        %td= @invoice.date.to_s
+        %td= @invoice.due_date.to_s
+
+  %table.line-item-table
+    %thead
+      %tr
+        %th Description
+        %th Quantity
+        %th Unit Amount
+        %th Total
+
+    %tbody
+      - @invoice.line_items.each do |li|
+        %tr
+          %td= li.description
+          %td.number= li.quantity
+          %td.number= li.unit_amount.format
+          %td.number= li.subtotal.format
+
+    %tfoot
+      %tr
+        %td Total
+        %td/
+        %td/
+        %td.number= @invoice.total.format
+
+  %h2 Completed Tasks
+
+  - @invoice.hours.map(&:task).uniq.each do |task|
+    %h3= task.subject
+    %p= task.description

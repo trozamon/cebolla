@@ -1,0 +1,15 @@
+.ui.breadcrumb
+  = link_to 'Dashboard', root_path, class: 'section'
+  %i.right.angle.divider.icon
+  = link_to 'Invoices', invoices_path, class: 'section'
+  %i.right.angle.divider.icon
+  .active.section New Invoice
+
+= form_with scope: :invoice, url: invoices_path, class: 'ui form' do |f|
+  - if @invoice.customer
+    = f.hidden_field :customer_id, value: @invoice.customer.id
+  = render partial: 'fields', locals: { f: f }
+  = f.submit 'Create Invoice', class: 'ui button'
+
+%p Line items which will be in this invoice:
+= render partial: 'line_items', locals: { invoice: @invoice }

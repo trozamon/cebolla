@@ -1,0 +1,36 @@
+.ui.breadcrumb
+  = link_to 'Dashboard', root_path, class: 'section'
+  %i.right.angle.divider.icon
+  = link_to 'Projects', projects_path, class: 'section'
+  %i.right.angle.divider.icon
+  = link_to @project.name, project_path(@project), class: 'section'
+  %i.right.angle.divider.icon
+  .active.section= @task.subject
+
+%h2.ui.header= @task.subject
+%p= link_to 'Edit', edit_task_path(@task)
+%p= link_to 'Add hours', new_task_hour_path(@task)
+%p #{@task.kind.titleize} - #{@task.state.titleize}
+
+%p
+  Estimated hours: #{@task.est_hours || 'N/A'}
+
+%h4.ui.header Description
+= simple_format @task.description
+
+- if @task.hours.any?
+  %h4.ui.header Hours
+
+  %table.ui.very.basic.table
+    %thead
+      %tr
+        %th Date
+        %th Description
+        %th Amount
+
+    %tbody
+      - @task.hours.find_each do |hour|
+        %tr
+          %td= hour.date
+          %td= hour.description
+          %td= hour.num

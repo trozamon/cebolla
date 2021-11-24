@@ -1,0 +1,22 @@
+* remove personal info and delete history
+  invoices/show.pdf.haml
+* name PDFs `biz-XXXX` when downloading
+* show unbilled rev
+* show hours worked in the past few weeks (calendar?)
+* gen invoices in a background job on a schedule
+* trial rates
+* moving projects between entities
+* many-to-many relationships between entities and users
+* different prices for different labor types
+** specing
+** bugs
+** features
+** sysadmin
+* multiplier rates for hours billed
+** e.g. an intern gets billed at 0.3x hourly (works 100 hours, bill for 30)
+* control for hours to bill on a task
+** fixed price jobs - bill to estimate
+   this would probably need to be reviewed every billing cycle
+** max price jobs - bill to lower of estimate or actual
+   does per-task make sense?
+** custom - another field in a addition to estimated that is hours to bill

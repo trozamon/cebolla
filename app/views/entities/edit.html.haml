@@ -1,0 +1,16 @@
+%h1 Edit #{@entity.name}
+
+= form_with model: @entity do |f|
+  = f.label :name
+  = f.text_field :name
+
+  = f.label :email
+  = f.text_field :email
+
+  = f.label :phone
+  = f.text_field :phone
+
+  = f.fields_for :address do |addr_form|
+    = render partial: 'shared/address/fields', locals: { f: addr_form }
+
+  = f.submit

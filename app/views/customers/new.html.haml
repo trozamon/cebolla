@@ -1,0 +1,5 @@
+%h1 Add a customer
+
+= form_with scope: :customer, url: customers_path do |f|
+  = render partial: 'shared/customer/fields', locals: { f: f }
+  = f.submit

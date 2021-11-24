@@ -1,0 +1,73 @@
+.ui.breadcrumb
+  = link_to 'Dashboard', root_path, class: 'section'
+  %i.right.angle.divider.icon
+  = link_to 'Projects', projects_path, class: 'section'
+  %i.right.angle.divider.icon
+  .active.section= @project.name
+
+%p
+  #{@project.entity.name}
+  %i.arrows.alternate.horizontal.icon
+  #{@project.customer.name}
+
+- if @project.hourly_rate.present?
+  %p #{@project.hourly_rate.format}/hr
+
+- if @project.due_date.present?
+  %p Due on #{@project.due_date}
+- else
+  %p Perpetual
+
+%p= link_to 'Archive', archive_project_path(@project)
+
+%p= link_to 'Edit', edit_project_path(@project)
+
+%p= link_to 'New task', new_project_task_path(@project)
+
+%h3 Open Tasks
+
+%table.ui.basic.table
+  %thead
+    %tr
+      %th Subject
+      %th Description
+      %th Kind
+      %th State
+      %th Act/Est
+      %th/
+      %th/
+      %th/
+
+  %tbody
+    - @project.tasks.open.order(:state).each do |task|
+      %tr
+        %td= link_to task.subject, task_path(task)
+        %td= truncate(task.description)
+        %td= task.kind
+        %td= task.state.titleize
+        %td #{task.hours.sum(:num)}/#{task.est_hours}
+        %td= link_to 'Edit', edit_task_path(task)
+        %td= link_to 'Add hours', new_task_hour_path(task)
+        %td
+          = link_to 'Destroy',
+            task_path(task),
+            method: :delete,
+            data: { confirm: 'Are you sure you want to remove this task?' }
+
+%h3 Closed, unbilled
+
+%table.ui.basic.table
+  %thead
+    %tr
+      %th Subject
+      %th Description
+      %th Kind
+      %th Act
+
+  %tbody
+    - @unbilled.find_each do |task|
+      %tr
+        %td= link_to task.subject, task_path(task)
+        %td= truncate(task.description)
+        %td= task.kind
+        %td= task.hours.sum(:num)

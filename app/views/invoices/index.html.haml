@@ -1,0 +1,23 @@
+.ui.breadcrumb
+  = link_to 'Dashboard', root_path, class: 'section'
+  %i.right.angle.divider.icon
+  .active.section Invoices
+
+= form_with method: :get,
+  url: new_invoice_path,
+  local: true,
+  class: 'ui form' do |f|
+
+  .inline.fields
+    .field
+      = f.select :customer_id, Customer.all.collect { |c| [c.name, c.id] }
+    .field
+      = f.submit 'New Invoice', name: nil, class: 'ui button'
+
+%h3.ui.header Open
+- @open.each do |inv|
+  %p= link_to "Invoice #{inv.number}", invoice_path(inv)
+
+%h3.ui.header Recently Posted
+- @posted.each do |inv|
+  %p= link_to "Invoice #{inv.number}", invoice_path(inv)

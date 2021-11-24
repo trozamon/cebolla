@@ -1,0 +1,6 @@
+%h1 Entities
+
+%p= link_to 'New entity', new_entity_path
+
+- @entities.find_each do |ent|
+  %p= link_to ent.name, edit_entity_path(ent)

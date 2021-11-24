@@ -1,0 +1,6 @@
+%h1 Customers
+
+%p= link_to 'New customer', new_customer_path
+
+- @customers.each do |cust|
+  %p= link_to cust.name, edit_customer_path(cust)

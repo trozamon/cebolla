@@ -1,0 +1,20 @@
+.field
+  = f.label :subject
+  = f.text_field :subject
+
+.field
+  = f.label :description
+  = f.text_area :description
+
+.field
+  = f.label :kind
+  = f.select :kind, options_for_select([['Feature', 'feature'], ['Bug', 'bug']], f.object&.kind)
+
+.field
+  = f.label :state
+  = f.select :state,
+    options_for_select([['New', 'brand_new'], ['In Progress', 'in_progress'], ['Resolved', 'resolved'], ['Closed', 'closed']], f.object&.state)
+
+.field
+  = f.label :est_hours
+  = f.text_field :est_hours

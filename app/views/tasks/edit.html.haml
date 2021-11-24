@@ -1,0 +1,17 @@
+.ui.breadcrumb
+  = link_to 'Dashboard', root_path, class: 'section'
+  %i.right.angle.divider.icon
+  = link_to 'Projects', projects_path, class: 'section'
+  %i.right.angle.divider.icon
+  = link_to @task.project.name, project_path(@task.project), class: 'section'
+  %i.right.angle.divider.icon
+  .active.section= @task.subject
+
+= form_with model: @task, class: 'ui form' do |f|
+  .field
+    = f.label :project_id
+    = f.select :project_id,
+      options_for_select(@projects.map { |p| [p.name, p.id] }, @project.id)
+
+  = render partial: 'fields', locals: { f: f }
+  = f.submit 'Save Task', class: 'ui button'

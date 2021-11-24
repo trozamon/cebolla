@@ -1,0 +1,105 @@
+= Cebolla Functional Specification
+
+== Summary
+
+Cebolla is project management for small software shops.
+Does bug/feature tracking, billing, and very basic financial reporting.
+
+== Scenarios
+
+One user is Alec.
+He is a grumpy programmer that wants to track projects, bill out time using
+a few different schemes, and that's it.
+
+== Non-goals
+
+* No handling of electronic payments
+* No accounting
+
+== Page by Page Specification
+
+=== Login
+
+There is one user account for alec@alectenharmsel.com.
+He can login in with whatever password he sets.
+
+=== User Preferences
+
+Users can update their password on a preferences page.
+
+=== Entity Management
+
+Business entities have a name, an address, an email address, and a phone
+number.
+Business entities have invoices.
+
+==== Create Entity
+
+There should be a form to create an entity which takes:
+
+* Name
+* Address (street, apt, city, state, zip)
+* Email address
+* Phone number
+* Starting invoice number
+
+None of these fields can be nil.
+Email address and phone should be validated for format.
+
+==== Update Entity
+
+Same as create entity page, except, you know, obviously updating something.
+
+=== Customers
+
+Customers have a name, an email address to send invoices to, and a default
+hourly rate.
+They can be created and updated.
+
+=== Projects
+
+Projects are how work is organized.
+They contain configuration for billing and help organize invoices.
+
+Projects have a name, belong to a customer and entity, and have an optional
+default rate.
+Projects can have a due date or be "perpetual", e.g. for a generic
+ongoing bug-fixing or support.
+
+==== Billing
+
+Projects can be billed either hourly or lump sum.
+For hourly, every month on the 1st or the next business day, all closed
+tasks that haven't been billed are billed.
+For lump sum, it's billed when the project is closed.
+
+=== Tasks
+
+Tasks belong to projects.
+They have an estimated number of hours, a subject, a description,
+and whether it's a bug or a feature.
+
+==== Status
+
+Tasks start out being new.
+When work starts, users move them to in-progress.
+Once deployed, users move them to resolved.
+After double checking hours and such, users close them to mark them ready for
+billing.
+
+=== Hours
+
+Hours worked can be added to a task, even if it's closed.
+They have a number of hours, date worked, description of work performed,
+and the user that did the work.
+They belong to a line item of an invoice once they've been billed.
+
+=== Invoice
+
+Invoices take all closed tasks with unbilled hours, gather them up, organize
+it nicely, and make an invoice.
+Invoices have a custom number.
+Invoices have entity and customer info on top, along with an invoice number.
+The billing part of the invoice has projects w/ hours, rate, subtotals,
+and total.
+Below that, there are details for all the completed tasks.

@@ -1,0 +1,14 @@
+.ui.breadcrumb
+  = link_to 'Dashboard', root_path, class: 'section'
+  %i.right.angle.divider.icon
+  = link_to 'Projects', projects_path, class: 'section'
+  %i.right.angle.divider.icon
+  = link_to @task.project.name, project_path(@task.project), class: 'section'
+  %i.right.angle.divider.icon
+  = link_to @task.subject, task_path(@task), class: 'section'
+  %i.right.angle.divider.icon
+  .active.section New Hours
+
+= form_with scope: :hour, url: task_hours_path, class: 'ui form' do |f|
+  = render partial: 'fields', locals: { f: f }
+  = f.submit 'Add Hours', class: 'ui button'

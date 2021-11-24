@@ -1,0 +1,41 @@
+.ui.breadcrumb
+  = link_to 'Dashboard', root_path, class: 'section'
+  %i.right.angle.divider.icon
+  .active.section Projects
+
+%p= link_to 'New project', new_project_path
+
+%table.ui.basic.table
+  %thead
+    %tr
+      %th/
+      %th Name
+      %th Customer
+      %th Est. Hours
+      %th Hourly Rate
+      %th Potential Revenue
+      %th Due Date
+      %th/
+
+  %tbody
+    - @projects.each.with_index do |project, index|
+      - diff_cust = project.customer_id != @projects[index - 1].customer_id
+      - if index == 0 || diff_cust
+        %tr
+          %td
+            %b= project.customer.name
+          %td{ colspan: 7 }/
+
+      %tr
+        %td/
+        %td= link_to project.name, project_path(project)
+        %td= project.customer.name
+        %td= project.tasks.open.sum(:est_hours)
+        - if project.hourly_rate.present?
+          %td= project.hourly_rate.format
+          %td= project.potential_revenue.format
+        - else
+          %td/
+          %td/
+        %td= project.due_date.present? ? project.due_date : 'Perpetual'
+        %td/

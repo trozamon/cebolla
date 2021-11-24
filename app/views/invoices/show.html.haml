@@ -1,0 +1,21 @@
+.ui.breadcrumb
+  = link_to 'Dashboard', root_path, class: 'section'
+  %i.right.angle.divider.icon
+  = link_to 'Invoices', invoices_path, class: 'section'
+  %i.right.angle.divider.icon
+  .active.section Invoice #{@invoice.number}
+
+%h2.ui.header Invoice #{@invoice.number}
+
+%p= link_to 'View PDF', invoice_path(@invoice, format: :pdf), target: '_blank'
+
+%p Date: #{@invoice.date}
+%p Due Date: #{@invoice.due_date}
+
+- unless @invoice.posted?
+  = link_to 'Post', post_invoice_path(@invoice), class: 'ui button', method: :post
+
+= render partial: 'line_items', locals: { invoice: @invoice }
+
+- unless @invoice.posted?
+  = link_to 'New line item', new_invoice_line_item_path(@invoice), class: 'ui button'
