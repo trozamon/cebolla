@@ -1,3 +1,7 @@
+* statements of work
+  start date, end date
+  renewal?
+* show addresses on invoice
 * remove personal info and delete history
   invoices/show.pdf.haml
 * name PDFs `biz-XXXX` when downloading
