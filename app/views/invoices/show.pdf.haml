@@ -6,6 +6,25 @@
       background-color: #FFF;
     }
 
+    .header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 3em;
+    }
+
+    .header h2 {
+      margin-bottom: 0.3em;
+    }
+
+    .header p {
+      margin-top: 0em;
+      margin-bottom: 0.3em;
+    }
+
+    .header .right {
+      text-align: right;
+    }
+
     .centered {
       text-align: center;
     }
@@ -58,9 +77,21 @@
     }
 
 %body
-  = @invoice.entity.name
+  .header
+    .left
+      %h2= @invoice.entity.name
+      - if @invoice.entity.address.present?
+        %p
+          - address = @invoice.entity.address
+          = address.line1
+          - if address.line2.present?
+            %br
+            = address.line2
+          %br
+          #{address.city}, #{address.state} #{address.zip}
 
-  %h1.centered Invoice ##{@invoice.number}
+    .right
+      %h2 Invoice ##{@invoice.number}
 
   %table.date-table
     %thead
@@ -72,6 +103,15 @@
       %tr
         %td
           #{@invoice.customer.name}
+          - if @invoice.customer.address.present?
+            %br
+            - address = @invoice.customer.address
+            = address.line1
+            - if address.line2.present?
+              %br
+              = address.line2
+            %br
+            #{address.city}, #{address.state} #{address.zip}
 
         %td= @invoice.date.to_s
         %td= @invoice.due_date.to_s

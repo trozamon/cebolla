@@ -5,6 +5,7 @@ ruby '2.6.6'
 
 gem 'rails', '~> 6.0.1' # rails obvi
 gem 'devise' # authentication
+gem 'grover' # PDF generation
 gem 'haml' # better templates
 gem 'money-rails' # nice money handling
 gem 'pg' # database
@@ -13,9 +14,6 @@ gem 'sass-rails', '>= 6' # Use SCSS for stylesheets
 gem 'semantic-ui-sass' # Semantic UI
 gem 'webpacker', '~> 4.0' # Transpile app-like JavaScript
 gem 'turbolinks', '~> 5' # Fast navigation
-
-# PDF generation
-gem 'wicked_pdf'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
