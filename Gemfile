@@ -11,7 +11,6 @@ gem 'money-rails' # nice money handling
 gem 'pg' # database
 gem 'puma' # app server
 gem 'sass-rails', '>= 6' # Use SCSS for stylesheets
-gem 'semantic-ui-sass' # Semantic UI
 gem 'webpacker', '~> 4.0' # Transpile app-like JavaScript
 gem 'turbolinks', '~> 5' # Fast navigation
 
