@@ -9,8 +9,16 @@
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
 
   %body
+    %nav.top.container
+      = link_to 'Dashboard', root_path
+      = link_to 'Entities', entities_path
+      = link_to 'Customers', customers_path
+      = link_to 'Projects', projects_path
+      = link_to 'Invoices', invoices_path
+
     .container
       %p.notice= notice
       %p.alert= alert
 
-    = yield
+    .container
+      = yield
