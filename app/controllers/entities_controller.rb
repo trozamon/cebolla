@@ -31,6 +31,6 @@ class EntitiesController < AuthedController
           .permit(:name,
                   :email,
                   :phone,
-                  address_attributes: %i[line1 line2 city state zip])
+                  address_attributes: %i[city id line1 line2 state zip])
   end
 end

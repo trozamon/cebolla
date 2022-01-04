@@ -6,10 +6,16 @@ class CustomersController < AuthedController
 
   def edit
     @customer = Customer.find(params[:id])
+    @customer.build_address if @customer.address.blank?
   end
 
   def index
     @customers = Customer.all
+  end
+
+  def new
+    @customer = Customer.new
+    @customer.build_address
   end
 
   def update
@@ -24,6 +30,7 @@ class CustomersController < AuthedController
           .permit(:name,
                   :email,
                   :default_hourly_rate_cents,
-                  :default_hourly_rate_currency)
+                  :default_hourly_rate_currency,
+                  address_attributes: %i[city id line1 line2 state zip])
   end
 end

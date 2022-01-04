@@ -1,28 +1,24 @@
 %h1 Dashboard
 
-%ul
-  %li= link_to 'Entities', entities_path
-  %li= link_to 'Customers', customers_path
-  %li= link_to 'Projects', projects_path
-  %li= link_to 'Invoices', invoices_path
-
-%table.ui.very.basic.table
+%table
   %thead
     %tr
       %th/
-      %th Unbilled Hours
-      %th Open Tasks
-      %th Potential Revenue
+      %th.right.aligned Unbilled Hours
+      %th.right.aligned Open Tasks
+      %th.right.aligned Projected Revenue
 
   %tbody
     - @customers.find_each do |customer|
       %tr
         %td= customer.name
-        %td= @unbilled_hours[customer.id] || 0
-        %td= customer.tasks.open.count
-        %td= (@potential_revenue[customer.id] || Money.new(0, 'USD')).format
+        %td.right.aligned= @unbilled_hours[customer.id] || 0
+        %td.right.aligned= customer.tasks.open.count
+        %td.right.aligned= (@potential_revenue[customer.id] || Money.new(0, 'USD')).format
+
+  %tfoot
     %tr
       %td Totals
-      %td= @unbilled_hours.values.inject(:+)
-      %td= @tasks
-      %td= (@potential_revenue.values.inject(:+) || Money.new(0, 'USD')).format
+      %td.right.aligned= @unbilled_hours.values.inject(:+)
+      %td.right.aligned= @tasks
+      %td.right.aligned= (@potential_revenue.values.inject(:+) || Money.new(0, 'USD')).format

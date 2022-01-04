@@ -1,15 +1,6 @@
-.ui.breadcrumb
-  = link_to 'Dashboard', root_path, class: 'section'
-  %i.right.angle.divider.icon
-  = link_to 'Projects', projects_path, class: 'section'
-  %i.right.angle.divider.icon
-  = link_to @project.name, project_path(@project), class: 'section'
-  %i.right.angle.divider.icon
-  .active.section Archive
+%h2 Archive #{@project.name}?
 
-%h2.ui.header Archive #{@project.name}?
-
-.ui.message
+.message
   Are you sure you want to archive this project?
 
 = link_to 'Archive', archive_project_path(@project), method: :post, class: 'ui button'

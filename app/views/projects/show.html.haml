@@ -1,17 +1,14 @@
-.ui.breadcrumb
-  = link_to 'Dashboard', root_path, class: 'section'
-  %i.right.angle.divider.icon
-  = link_to 'Projects', projects_path, class: 'section'
-  %i.right.angle.divider.icon
-  .active.section= @project.name
+%h1= @project.name
 
 %p
+  %b Services Performed By:
+  %br
   #{@project.entity.name}
-  %i.arrows.alternate.horizontal.icon
-  #{@project.customer.name}
 
-- if @project.hourly_rate.present?
-  %p #{@project.hourly_rate.format}/hr
+%p
+  %b Services Performed For:
+  %br
+  #{@project.customer.name}
 
 - if @project.due_date.present?
   %p Due on #{@project.due_date}
@@ -26,7 +23,7 @@
 
 %h3 Open Tasks
 
-%table.ui.basic.table
+%table
   %thead
     %tr
       %th Subject
@@ -56,7 +53,7 @@
 
 %h3 Closed, unbilled
 
-%table.ui.basic.table
+%table
   %thead
     %tr
       %th Subject

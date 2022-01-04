@@ -1,0 +1,13 @@
+form .field {
+  margin-bottom: 0.7em;
+
+  label {
+    font-weight: 700;
+    margin-bottom: 0.4em;
+
+    &:after {
+      content: "\A";
+      white-space: pre;
+    }
+  }
+}

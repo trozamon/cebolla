@@ -1,6 +1,27 @@
 %h1 Customers
 
-%p= link_to 'New customer', new_customer_path
+%table
+  %thead
+    %tr
+      %th Name
+      %th Address
+      %th.right.aligned # Projects
 
-- @customers.each do |cust|
-  %p= link_to cust.name, edit_customer_path(cust)
+  %tbody
+    - @customers.each do |cust|
+      %tr
+        %td= link_to cust.name, edit_customer_path(cust)
+
+        %td
+          - if cust.address
+            %p
+              = cust.address.line1
+              %br
+              #{cust.address.city}, #{cust.address.state} #{cust.address.zip}
+          - else
+            No address
+
+        %td.right.aligned
+          = cust.projects.count
+
+%p= link_to 'New customer', new_customer_path

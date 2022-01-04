@@ -1,19 +1,13 @@
-.ui.breadcrumb
-  = link_to 'Dashboard', root_path, class: 'section'
-  %i.right.angle.divider.icon
-  .active.section Projects
+%h1 Projects
 
-%p= link_to 'New project', new_project_path
-
-%table.ui.basic.table
+%table
   %thead
     %tr
       %th/
       %th Name
-      %th Customer
-      %th Est. Hours
-      %th Hourly Rate
-      %th Potential Revenue
+      %th.right.aligned Est. Hours
+      %th.right.aligned Hourly Rate
+      %th.right.aligned Potential Revenue
       %th Due Date
       %th/
 
@@ -29,13 +23,14 @@
       %tr
         %td/
         %td= link_to project.name, project_path(project)
-        %td= project.customer.name
-        %td= project.tasks.open.sum(:est_hours)
+        %td.right.aligned= project.tasks.open.sum(:est_hours)
         - if project.hourly_rate.present?
-          %td= project.hourly_rate.format
-          %td= project.potential_revenue.format
+          %td.right.aligned= project.hourly_rate.format
+          %td.right.aligned= project.potential_revenue.format
         - else
           %td/
           %td/
         %td= project.due_date.present? ? project.due_date : 'Perpetual'
         %td/
+
+%p= link_to 'New project', new_project_path

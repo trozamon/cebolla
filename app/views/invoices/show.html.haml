@@ -1,11 +1,4 @@
-.ui.breadcrumb
-  = link_to 'Dashboard', root_path, class: 'section'
-  %i.right.angle.divider.icon
-  = link_to 'Invoices', invoices_path, class: 'section'
-  %i.right.angle.divider.icon
-  .active.section Invoice #{@invoice.number}
-
-%h2.ui.header Invoice #{@invoice.number}
+%h2 Invoice #{@invoice.number}
 
 %p= link_to 'View PDF', invoice_path(@invoice, format: :pdf), target: '_blank'
 
