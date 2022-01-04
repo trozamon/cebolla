@@ -1,7 +1,24 @@
-.container
-  %h1 Entities
+%h1 Entities
 
-  %p= link_to 'New entity', new_entity_path
+%table
+  %thead
+    %tr
+      %th Name
+      %th Address
+      %th.right.aligned # Projects
 
-  - @entities.find_each do |ent|
-    %p= link_to ent.name, edit_entity_path(ent)
+  %tbody
+    - @entities.find_each do |ent|
+      %tr
+        %td= link_to ent.name, edit_entity_path(ent)
+
+        %td
+          %p
+            = ent.address.line1
+            %br
+            #{ent.address.city}, #{ent.address.state} #{ent.address.zip}
+
+        %td.right.aligned
+          = ent.projects.count
+
+%p= link_to 'New entity', new_entity_path

@@ -1,0 +1,14 @@
+.field
+  = f.label :name
+  = f.text_field :name
+
+.field
+  = f.label :email
+  = f.text_field :email
+
+.field
+  = f.label :phone
+  = f.text_field :phone
+
+= f.fields_for :address do |addr_form|
+  = render partial: 'shared/address/fields', locals: { f: addr_form }
