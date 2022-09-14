@@ -10,7 +10,7 @@ class CustomersController < AuthedController
   end
 
   def index
-    @customers = Customer.all
+    @customers = Customer.order(:name)
   end
 
   def new
