@@ -25,4 +25,11 @@ Rails.application.routes.draw do
   resources :tasks, only: %i[destroy edit show update] do
     resources :hours, only: %i[create new]
   end
+
+  # TODO: limit this to admins, e.g. authenticate :user, -> (user) { user.admin? } do
+  authenticate :user do
+    namespace :admin do
+      mount PgHero::Engine, at: :pghero
+    end
+  end
 end
