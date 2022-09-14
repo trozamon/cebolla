@@ -1,5 +1,5 @@
 %h1 Edit #{@customer.name}
 
 = form_with model: @customer do |f|
-  = render partial: 'shared/customer/fields', locals: { f: f }
+  = render partial: 'fields', locals: { f: f }
   = f.submit
