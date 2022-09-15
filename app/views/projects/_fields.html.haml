@@ -4,11 +4,11 @@
 
 .field
   = f.label :entity_id
-  = f.select :entity_id, options_for_select(Entity.all.map { |ent| [ent.name, ent.id] })
+  = f.select :entity_id, options_for_select(Entity.order(:name).map { |ent| [ent.name, ent.id] })
 
 .field
   = f.label :customer_id
-  = f.select :customer_id, options_for_select(Customer.all.map { |cust| [cust.name, cust.id] })
+  = f.select :customer_id, options_for_select(Customer.order(:name).map { |cust| [cust.name, cust.id] })
 
 .field
   = f.label :due_date
