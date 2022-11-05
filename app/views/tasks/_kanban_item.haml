@@ -1,0 +1,8 @@
+= link_to task_path(task), class: 'card', data: { 'id' => task.id, 'kanban-target' => 'card' } do
+  .title
+    = task.subject
+  .subtitle
+    = task.project.name
+
+  .content
+    = truncate task.description

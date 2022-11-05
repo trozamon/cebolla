@@ -1,0 +1,19 @@
+.grid-4 {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+
+  &.padded {
+    .col:first-child {
+      padding-left: 0;
+    }
+
+    .col:last-child {
+      padding-right: 0;
+    }
+
+    .col {
+      padding-left: 0.2em;
+      padding-right: 0.2em;
+    }
+  }
+}

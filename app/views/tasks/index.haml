@@ -1,0 +1,24 @@
+%h1 Tasks
+
+.grid-4.padded{ data: { controller: 'kanban' } }
+  .col{ 'data-kanban-target' => 'new' }
+    %h3 New
+    - @tasks.where(state: :brand_new).each do |task|
+      = render partial: 'kanban_item', locals: { task: task }
+
+  .col{ 'data-kanban-target' => 'inProgress' }
+    %h3 In Progress
+    - @tasks.where(state: :in_progress).each do |task|
+      = render partial: 'kanban_item', locals: { task: task }
+
+  .col{ 'data-kanban-target' => 'resolved' }
+    %h3 Resolved
+    - @tasks.where(state: :resolved).each do |task|
+      = render partial: 'kanban_item', locals: { task: task }
+
+  .col{ 'data-kanban-target' => 'recentlyCompleted' }
+    %h3 Recently Completed
+    - @tasks.where.not(state: %i[brand_new in_progress resolved]).each do |task|
+      = render partial: 'kanban_item', locals: { task: task }
+
+= form_with id: 'task-sub', url: '#'

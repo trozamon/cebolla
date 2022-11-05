@@ -22,8 +22,13 @@ Rails.application.routes.draw do
     resources :tasks, only: %i[create new]
   end
 
-  resources :tasks, only: %i[destroy edit show update] do
+  resources :tasks, only: %i[destroy edit index show update] do
     resources :hours, only: %i[create new]
+
+    post :complete, on: :member
+    post :resolve, on: :member
+    post :start, on: :member
+    post :unstart, on: :member
   end
 
   # TODO: limit this to admins, e.g. authenticate :user, -> (user) { user.admin? } do
