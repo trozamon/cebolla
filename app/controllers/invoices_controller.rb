@@ -27,14 +27,8 @@ class InvoicesController < AuthedController
     respond_to do |format|
       format.html
       format.pdf do
-        content = render_to_string(template: 'invoices/show',
-                                   format: 'pdf',
-                                   layout: 'pdf',
-                                   locals: { :@invoice => @invoice })
-        pdf = Grover.new(content, margin: { left: '0.5in', top: '0.5in', right: '0.5in', bottom: '0.5in' }).to_pdf
         @tmpfile = Tempfile.new("", nil, mode: File::CREAT | File::BINARY | File::RDWR, encoding: 'ASCII-8BIT')
-        @tmpfile.write(pdf)
-        @tmpfile.flush
+        InvoicePdf.new(@invoice).generate(@tmpfile.path)
         @tmpfile.rewind
         send_file @tmpfile,
                   filename: "#{@invoice.customer.name.downcase.gsub(/\s/, '')}-#{@invoice.number}.pdf",
