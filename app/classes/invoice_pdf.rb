@@ -1,45 +1,27 @@
-class InvoicePdf
-  FONT = 'Helvetica'
-  H2_SIZE = 16
-  P_SIZE = 12
-
+class InvoicePdf < BasePdf
   attr_reader :invoice
 
   def initialize(invoice)
     @invoice = invoice
   end
 
-  def generate(fname)
-    Prawn::Document.generate(fname) do |pdf|
-      pdf.font FONT
+  def generate_body(pdf)
+    print_header(pdf, invoice.entity, "Invoice ##{invoice.number}")
 
-      pdf.font(FONT, size: H2_SIZE, style: :bold) do
-        pdf.text invoice.entity.name
-        pdf.text_box("Invoice ##{invoice.number}",
-                     at: [300, 720],
-                     width: 235,
-                     align: :right)
-      end
+    pdf.move_down P_SIZE / 2
+    print_address(pdf)
 
-      pdf.move_down P_SIZE / 2
-      print_address(pdf)
+    pdf.move_down P_SIZE * 2
+    print_billing_info(pdf)
 
-      pdf.move_down P_SIZE * 2
-      print_billing_info(pdf)
+    pdf.move_down P_SIZE * 2
+    print_billing_table(pdf)
 
-      pdf.move_down P_SIZE * 2
-      print_billing_table(pdf)
-
-      pdf.move_down P_SIZE * 2
-      print_completed_tasks(pdf)
-    end
+    pdf.move_down P_SIZE * 2
+    print_completed_tasks(pdf)
   end
 
   private
-
-  def content_width(pdf)
-    pdf.page.dimensions[2] - pdf.page.margins[:left] - pdf.page.margins[:right]
-  end
 
   def print_address(pdf)
     address = invoice.entity.address
