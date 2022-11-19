@@ -39,6 +39,7 @@ class ProjectsController < AuthedController
   def project_params
     params.require(:project)
           .permit(:name,
+                  :description,
                   :entity_id,
                   :customer_id,
                   :due_date,

@@ -6,6 +6,7 @@
       %th Name
       %th Address
       %th.right.aligned # Projects
+      %th/
 
   %tbody
     - @customers.each do |cust|
@@ -23,5 +24,8 @@
 
         %td.right.aligned
           = cust.projects.count
+
+        %td
+          = link_to 'Project Status PDF', project_status_customer_path(cust, format: :pdf), target: '_blank'
 
 %p= link_to 'New customer', new_customer_path
