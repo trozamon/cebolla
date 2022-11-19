@@ -18,7 +18,8 @@ class ProjectStatusPdf < BasePdf
     print_summary_stats(pdf)
     pdf.move_down P_SIZE
 
-    projects.each do |project|
+    projects.each.with_index do |project, idx|
+      pdf.start_new_page if idx > 0
       print_project(pdf, project)
     end
   end
