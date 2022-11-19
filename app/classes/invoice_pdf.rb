@@ -8,9 +8,6 @@ class InvoicePdf < BasePdf
   def generate_body(pdf)
     print_header(pdf, invoice.entity, "Invoice ##{invoice.number}")
 
-    pdf.move_down P_SIZE / 2
-    print_address(pdf)
-
     pdf.move_down P_SIZE * 2
     print_billing_info(pdf)
 
@@ -22,15 +19,6 @@ class InvoicePdf < BasePdf
   end
 
   private
-
-  def print_address(pdf)
-    address = invoice.entity.address
-    pdf.text address.line1
-    if address.line2.present?
-      pdf.text address.line2
-    end
-    pdf.text "#{address.city}, #{address.state} #{address.zip}"
-  end
 
   def print_billing_info(pdf)
     width = content_width(pdf) / 3.0

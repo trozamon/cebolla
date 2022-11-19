@@ -8,7 +8,6 @@ class Task < ApplicationRecord
   validates :state, presence: true
 
   scope :open, -> { where.not(state: :closed) }
-  scope :closed, -> { where(state: :closed) }
 
   enum kind: {
     bug: 1,

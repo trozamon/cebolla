@@ -1,6 +1,8 @@
 class BasePdf
   FONT = 'Helvetica'
+  H1_SIZE = 18
   H2_SIZE = 16
+  H3_SIZE = 14
   P_SIZE = 12
 
   def generate(fname)
@@ -15,12 +17,23 @@ class BasePdf
 
   def print_header(pdf, entity, right_text)
     pdf.font(FONT, size: H2_SIZE, style: :bold) do
-      pdf.text invoice.entity.name
+      pdf.text entity.name
       pdf.text_box(right_text, at: [300, 720], width: 235, align: :right)
     end
+
+    pdf.move_down P_SIZE / 2
+    print_address(pdf, entity.address)
   end
 
   def content_width(pdf)
     pdf.page.dimensions[2] - pdf.page.margins[:left] - pdf.page.margins[:right]
+  end
+
+  def print_address(pdf, address)
+    pdf.text address.line1
+    if address.line2.present?
+      pdf.text address.line2
+    end
+    pdf.text "#{address.city}, #{address.state} #{address.zip}"
   end
 end

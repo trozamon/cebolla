@@ -30,4 +30,8 @@ class Project < ApplicationRecord
   def potential_revenue
     hourly_rate * tasks.open.sum(:est_hours)
   end
+
+  def complete_unbilled_tasks
+    tasks.closed.joins(:hours).where(hours: { line_item_id: nil })
+  end
 end

@@ -8,7 +8,10 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :customers
+  resources :customers do
+    get :project_status, on: :member
+  end
+
   resources :entities
 
   resources :line_items, only: %i[edit update]
