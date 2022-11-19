@@ -32,6 +32,9 @@ class Project < ApplicationRecord
   end
 
   def complete_unbilled_tasks
-    tasks.closed.joins(:hours).where(hours: { line_item_id: nil })
+    tasks.closed
+         .joins(:hours)
+         .where(hours: { line_item_id: nil })
+         .distinct
   end
 end
