@@ -5,16 +5,10 @@ default: &default
 
 development:
   <<: *default
-  host: localhost
-  username: cebolla_dev
-  password: cebolla_dev
   database: cebolla_dev
 
 test:
   <<: *default
-  host: localhost
-  username: cebolla_test
-  password: cebolla_test
   database: cebolla_test
 
 production:
