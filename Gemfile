@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.6'
+ruby '3.0.5'
 
 gem 'rails', '~> 6.0.1' # rails obvi
 gem 'devise' # authentication
@@ -24,6 +24,12 @@ group :development, :test do
   gem 'faker'
   gem 'factory_bot_rails'
   gem 'rspec-rails'
+
+  # static analyzers
+  gem 'brakeman', require: false
+  gem 'bundler-audit', require: false
+  gem 'haml_lint', require: false
+  gem 'rubocop', require: false
 end
 
 group :development do
