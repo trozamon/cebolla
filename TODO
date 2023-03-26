@@ -9,6 +9,4 @@ reminders for generating invoices
   e.g. for a monthly account that bills on the 1st
   if current month has no invoice, show a warning + link to make invoice
 
-switch PDFs to prawn?
-
 support capping labor at estimate and showing that on the invoice
