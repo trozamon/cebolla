@@ -1,0 +1,102 @@
+\documentclass{book}
+
+\usepackage{hyperref}
+
+\begin{document}
+
+\title{cebolla Functional Specification}
+\author{
+    Alec Ten Harmsel\\
+    $<$alec@alectenharmsel.com$>$
+}
+\date{}
+\maketitle
+
+\chapter{Introduction}
+
+\section{Overview}
+
+cebolla helps individual and small shops manage projects.
+Using cebolla, you can add customers, add projects, make estimates and change
+orders, keep track of tasks and hours, and make invoices.
+
+\section{Non-Goals}
+
+cebolla makes invoices, but it doesn't do double-entry bookkeeping.
+Use something like GnuCash for that instead.
+
+\chapter{Features}
+
+\section{Entities}
+
+Work in progress.
+
+\section{Customers}
+
+% TODO
+Work in progress.
+
+\section{Projects}
+
+Projects group related tasks and store billing-related configuration.
+Projects may be estimated or ad hoc.
+Estimated projects may be billed monthly or lump sum when delivered.
+Estimated projects have a due date, but it's set by the estimate or latest
+change order.
+Ad hoc projects may only be billed monthly, and do not have a due date.
+Once created, a project's name may be changed, but other attributes cannot.
+A project's due date may be changed via a change order.
+
+Projects without any estimates, tasks, or invoices may be deleted (e.g. if it
+was created in error).
+
+% TODO: projects can't be archived if any tasks are not done
+
+\subsection{Project Lifecycle}
+
+Ad hoc projects are created ``in progress'' and remain that way until archived.
+Estimated projects start in the ``estimating'' state, transition to ``in
+progress'' after the estimate is finalized, and then become ``done'' once all
+the tasks are finished.
+Change orders may be added while an estimated project is running and don't
+change the state.
+
+When an estimated project is created, an estimate is automatically created as
+well.
+Estimates have a number, a due date, and a status.
+The number for the initial estimate is zero, the first change order is one, and
+so on.
+The due date must be set before finalizing, and will be copied to the project
+when it's finalized.
+The status is ``Draft'' initially, and becomes ``Active'' once finalized.
+
+Tasks may be created for an estimated project when there's a draft estimate,
+and all these tasks must have an estimated number of hours.
+The estimate may be finalized by clicking the ``Finalize'' button; this will
+link the tasks to the estimate, update the project's due date, and make the
+estimate active.
+On a draft estimate's page, the future-associated tasks are shown along with
+some estimated due dates--one based on a 40 hour work week with every task
+completed in its estimated time and one based on a 40 hour work week with every
+task taking 20\% longer (called the buffer estimate).
+
+The proper name for estimates with a number of zero is ``Estimate M-N'', where
+``M'' is the project number and ``N'' is the estimate number.
+The proper name for estimates with a number of one or greater is ``Change Order
+M-N'', where ``M'' is the project number and ``N'' is the estimate number.
+
+Estimates may be exported to PDF.
+These PDFs are meant to be given to customers, and show the entity name,
+project name, the project description, the estimate's proper name, and the task
+subjects.
+For draft estimates, the estimated 20\% buffer due date is shown as ``Estimated
+Completion Date.''
+For active estimates, the configured due date is shown as ``Targeted Completion
+Date.''
+
+\subsection{Tasks}
+
+% TODO: tasks can't be added if there is no in-progress estimate or change
+% order
+
+\end{document}

@@ -4,3 +4,11 @@
 require_relative 'config/application'
 
 Rails.application.load_tasks
+
+task docs: ['doc/functional-spec.pdf']
+
+rule '.pdf' => '.tex' do |t|
+  Dir.chdir(Pathname.new(t.name).dirname) do
+    sh "latexmk -pdf #{Pathname.new(t.source).basename}"
+  end
+end
