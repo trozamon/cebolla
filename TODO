@@ -1,7 +1,3 @@
-write a functional spec
-
-add internal notes to tasks
-
 other desired features:
 * breadcrumbs
 
@@ -10,3 +6,4 @@ reminders for generating invoices
   if current month has no invoice, show a warning + link to make invoice
 
 support capping labor at estimate and showing that on the invoice
+  automatic discount for labor above estimate
