@@ -8,7 +8,9 @@ class TasksController < AuthedController
   end
 
   def create
-    @project.tasks.create!(task_params)
+    @project.tasks.create!(
+      task_params.merge(estimate: @project.draft_estimate)
+    )
     redirect_to @project
   end
 

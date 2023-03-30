@@ -1,23 +1,53 @@
 %h1= @project.name
 
 %p
-  %b Services Performed By:
-  %br
-  #{@project.entity.name}
+  = link_to 'Archive', archive_project_path(@project)
+  = link_to 'Edit', edit_project_path(@project)
 
-%p
-  %b Services Performed For:
-  %br
-  #{@project.customer.name}
+%table
+  %thead
+    %tr
+      %th For
+      %th Hours Cap
+      %th Billing
+      %th Status
+      %th Hours Cap
+      %th Due Date
+  %tbody
+    %tr
+      %td= @project.customer.name
+      %td= @project.hours_cap_kind.titleize
+      %td= @project.billing.titleize
+      %td= @project.status.titleize
+      %td= @project.hours_cap || '--'
+      %td= @project.due_date || '--'
 
-- if @project.due_date.present?
-  %p Due on #{@project.due_date}
-- else
-  %p Perpetual
+%p= @project.description
 
-%p= link_to 'Archive', archive_project_path(@project)
+- if @project.estimates.any?
+  %h3 Estimate and Change Orders
 
-%p= link_to 'Edit', edit_project_path(@project)
+  %table
+    %thead
+      %tr
+        %th Estimate
+        %th Start
+        %th Hours
+        %th Straight-line Completion
+        %th Estimated Completion
+        %th/
+        %th/
+
+    %tbody
+      - @project.estimates.each do |estimate|
+        %tr
+          %td= estimate.proper_name
+          %td= estimate.start_date
+          %td= estimate.hours.round(2)
+          %td= estimate.straight_line_completion
+          %td= estimate.estimated_completion
+          %td= link_to 'Edit', edit_estimate_path(estimate)
+          %td= link_to 'PDF', estimate_path(estimate, format: :pdf)
 
 %p= link_to 'New task', new_project_task_path(@project)
 

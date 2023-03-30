@@ -1,5 +1,5 @@
 class ProjectsController < AuthedController
-  before_action :set_project, only: %i[archive archive? edit show update]
+  before_action :set_project, only: %i[archive archive? edit show]
 
   def archive
     @project.archive!
@@ -7,8 +7,13 @@ class ProjectsController < AuthedController
   end
 
   def create
-    project = Project.create!(project_params)
-    redirect_to project_path(project)
+    res = Project::Upsert.call(params: params)
+
+    if res.error?
+      flash[:error] = res.error
+    end
+
+    redirect_to project_path(res.project)
   end
 
   def index
@@ -26,25 +31,18 @@ class ProjectsController < AuthedController
   end
 
   def update
-    @project.update!(project_params)
-    redirect_to project_path(@project)
+    res = Project::Upsert.call(params: params)
+
+    if res.error?
+      flash[:error] = res.error
+    end
+
+    redirect_to project_path(res.project)
   end
 
   private
 
   def set_project
     @project = Project.find(params[:id])
-  end
-
-  def project_params
-    params.require(:project)
-          .permit(:name,
-                  :description,
-                  :entity_id,
-                  :customer_id,
-                  :due_date,
-                  :default_hourly_rate_cents,
-                  :default_hourly_rate_currency,
-                  :billing)
   end
 end

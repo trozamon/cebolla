@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_19_130309) do
+ActiveRecord::Schema.define(version: 2023_03_30_123057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,18 @@ ActiveRecord::Schema.define(version: 2022_11_19_130309) do
     t.integer "starting_invoice", default: 1
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "estimates", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.integer "number", null: false
+    t.date "start_date"
+    t.date "due_date"
+    t.integer "status", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id", "number"], name: "index_estimates_on_project_id_and_number", unique: true
+    t.index ["project_id"], name: "index_estimates_on_project_id"
   end
 
   create_table "hours", force: :cascade do |t|
@@ -96,6 +108,9 @@ ActiveRecord::Schema.define(version: 2022_11_19_130309) do
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "archived_at"
     t.text "description"
+    t.integer "hours_cap_kind", null: false
+    t.decimal "hours_cap"
+    t.integer "status", null: false
     t.index ["customer_id"], name: "index_projects_on_customer_id"
     t.index ["entity_id"], name: "index_projects_on_entity_id"
   end
@@ -109,6 +124,8 @@ ActiveRecord::Schema.define(version: 2022_11_19_130309) do
     t.decimal "est_hours"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "estimate_id"
+    t.index ["estimate_id"], name: "index_tasks_on_estimate_id"
     t.index ["project_id"], name: "index_tasks_on_project_id"
   end
 
@@ -128,6 +145,7 @@ ActiveRecord::Schema.define(version: 2022_11_19_130309) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "estimates", "projects"
   add_foreign_key "hours", "tasks"
   add_foreign_key "hours", "users"
   add_foreign_key "invoices", "customers"
