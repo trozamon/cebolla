@@ -6,26 +6,28 @@
   = f.label :description
   = f.text_area :description
 
-.field
-  = f.label :entity_id
-  = f.select :entity_id, options_for_select(Entity.order(:name).map { |ent| [ent.name, ent.id] })
+- if f.object.nil? || f.object.new_record?
+  .field
+    = f.label :entity_id
+    = f.select :entity_id, options_for_select(Entity.order(:name).map { |ent| [ent.name, ent.id] })
 
-.field
-  = f.label :customer_id
-  = f.select :customer_id, options_for_select(Customer.order(:name).map { |cust| [cust.name, cust.id] })
+  .field
+    = f.label :customer_id
+    = f.select :customer_id, options_for_select(Customer.order(:name).map { |cust| [cust.name, cust.id] })
 
-.field
-  = f.label :due_date
-  = f.date_field :due_date
+  .field
+    = f.label :default_hourly_rate_cents
+    = f.text_field :default_hourly_rate_cents
 
-.field
-  = f.label :default_hourly_rate_cents
-  = f.text_field :default_hourly_rate_cents
+  .field
+    = f.label :default_hourly_rate_currency
+    = f.text_field :default_hourly_rate_currency
 
-.field
-  = f.label :default_hourly_rate_currency
-  = f.text_field :default_hourly_rate_currency
+  .field
+    = f.label :billing
+    = f.select :billing, options_for_select([['Monthly', :monthly], ['Lump Sum', :lump_sum]])
 
-.field
-  = f.label :billing
-  = f.select :billing, options_for_select([['Monthly', :monthly], ['Lump Sum', :lump_sum]])
+  .field
+    = f.label :hours_cap_kind, 'Hour Capping?'
+    = f.select :hours_cap_kind,
+      options_for_select([['Ad Hoc', :ad_hoc], ['Estimated', :estimated]])

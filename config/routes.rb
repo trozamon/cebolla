@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   end
 
   resources :entities
+  resources :estimates, only: %i[edit show update]
 
   resources :line_items, only: %i[edit update]
   resources :invoices do

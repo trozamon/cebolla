@@ -1,5 +1,6 @@
 class Task < ApplicationRecord
   belongs_to :project
+  belongs_to :estimate, optional: true
 
   has_many :hours, dependent: :destroy
 
