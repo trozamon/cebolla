@@ -58,7 +58,7 @@ class Estimate < ApplicationRecord
 
     days = days.ceil.to_i
 
-    tmp = start_date + days
+    tmp = (start_date || Time.zone.today) + days
     while tmp.saturday? || tmp.sunday?
       tmp = tmp + 1
     end
