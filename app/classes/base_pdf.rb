@@ -9,7 +9,7 @@ class BasePdf
 
   WATERMARK_SIZE = 144
   WATERMARK_COLOR = '000000'
-  WATERMARK_OPACITY = 0.4
+  WATERMARK_OPACITY = 0.3
 
   def generate(fname)
     Prawn::Document.generate(fname) do |pdf|
