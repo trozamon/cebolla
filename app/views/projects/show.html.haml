@@ -66,7 +66,7 @@
       %th/
 
   %tbody
-    - @project.tasks.open.order(:state).each do |task|
+    - @project.tasks.open.order(:subject).each do |task|
       %tr
         %td= link_to task.subject, task_path(task)
         %td= truncate(task.description)
