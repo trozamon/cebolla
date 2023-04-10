@@ -1,9 +1,10 @@
 class EstimatePdf < BasePdf
 
   DISCLAIMER = <<-TEXT
-  The hours and max price quoted reflect the estimated work based on current
-  specification and scope of work.  Changes to the specification or scope of
-  work will involve change orders that may increase the hours and max price.
+  The hours and approximate price quoted reflect the estimated work based on
+  current specification and scope of work.  Changes to the specification or
+  scope of work will involve change orders that may increase the hours and
+  approximate price.
   TEXT
 
   attr_reader :estimate
