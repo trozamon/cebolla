@@ -37,7 +37,7 @@ class EstimatePdf < BasePdf
       pdf.text_box 'Approx. Start', at: [0, pdf.cursor + P_SIZE], width: width, align: :center
       pdf.text_box 'Est. Completion', at: [width, pdf.cursor + P_SIZE], width: width, align: :center
       pdf.text_box 'Hours', at: [width * 2.0, pdf.cursor + P_SIZE], width: width, align: :center
-      pdf.text_box 'Max Price', at: [width * 3.0, pdf.cursor + P_SIZE], width: width, align: :center
+      pdf.text_box 'Approx. Price', at: [width * 3.0, pdf.cursor + P_SIZE], width: width, align: :center
     end
     pdf.move_down P_SIZE + 2
     pdf.text_box estimate.start_date.to_s, at: [0, pdf.cursor + P_SIZE], width: width, align: :center
