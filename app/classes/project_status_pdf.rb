@@ -72,6 +72,8 @@ class ProjectStatusPdf < BasePdf
   end
 
   def projects
-    customer.projects.active.order(:name)
+    tmp = customer.projects.active.order(:name).to_a
+
+    tmp.select { |p| p.tasks.open.any? }
   end
 end
