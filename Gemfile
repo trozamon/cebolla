@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.5'
 
-gem 'rails', '~> 6.0.1' # rails obvi
+gem 'rails', '~> 6' # rails obvi
 gem 'devise' # authentication
 gem 'haml' # better templates
 gem 'money-rails' # nice money handling
