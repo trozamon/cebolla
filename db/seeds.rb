@@ -15,6 +15,8 @@ ActiveRecord::Base.transaction do
                      .find_or_create_by!(name: 'Customer 1, Inc.')
 
   project = Project.create_with(name: 'Default Project',
+                                hours_cap_kind: :ad_hoc,
+                                status: :active,
                                 billing: :monthly)
                    .find_or_create_by!(entity: entity, customer: customer)
 end
