@@ -41,7 +41,12 @@ class TasksController < AuthedController
   end
 
   def update
-    @task.update!(task_params)
+    if @task.estimate_id.present? && @task.estimate.status_active?
+      @task.update!(task_params.except(:est_hours))
+    else
+      @task.update!(task_params)
+    end
+
     redirect_to task_path(@task)
   end
 

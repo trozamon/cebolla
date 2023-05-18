@@ -1,3 +1,8 @@
+%h1 Edit #{@estimate.project.name} estimate
+
 = form_with model: @estimate do |f|
-  = f.date_field :start_date
+  .field
+    = f.label :start_date, 'Start Date'
+    = f.date_field :start_date
+
   = f.submit

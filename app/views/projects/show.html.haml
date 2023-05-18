@@ -47,6 +47,7 @@
           %td= estimate.straight_line_completion
           %td= estimate.estimated_completion
           %td= link_to 'Edit', edit_estimate_path(estimate)
+          %td= link_to 'Finalize', finalize_estimate_path(estimate)
           %td= link_to 'PDF', estimate_path(estimate, format: :pdf)
 
 %p= link_to 'New task', new_project_task_path(@project)

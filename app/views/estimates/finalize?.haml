@@ -1,0 +1,8 @@
+%h1 Finalize #{@estimate.proper_name}
+
+= form_with url: finalize_estimate_path(@estimate) do |f|
+  %p
+    This will set the project due date to #{@estimate.estimated_completion}
+    and the hour cap to #{@estimate.hours}.
+
+  = f.submit 'Finalize'

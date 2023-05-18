@@ -1,10 +1,20 @@
 class EstimatesController < AuthedController
-  def edit
-    @estimate = Estimate.find(params[:id])
+  before_action :set_estimate
+
+  def finalize
+    Project.transaction do
+      @estimate.update!(status: :active,
+                        due_date: @estimate.estimated_completion)
+      @estimate.project.update!(status: :active,
+                                due_date: @estimate.estimated_completion,
+                                hours_cap: @estimate.hours)
+    end
+
+    flash[:success] = 'Finalized estimate'
+    redirect_to project_path(@estimate.project)
   end
 
   def show
-    @estimate = Estimate.find(params[:id])
     respond_to do |format|
       format.html
       format.pdf do
@@ -20,12 +30,15 @@ class EstimatesController < AuthedController
   end
 
   def update
-    @estimate = Estimate.find(params[:id])
     @estimate.update!(estimate_params)
     redirect_to project_path(@estimate.project)
   end
 
   private
+
+  def set_estimate
+    @estimate = Estimate.find(params[:id])
+  end
 
   def estimate_params
     params.require(:estimate).permit(:start_date)
