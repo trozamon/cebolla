@@ -8,9 +8,14 @@ class TasksController < AuthedController
   end
 
   def create
-    @project.tasks.create!(
-      task_params.merge(estimate: @project.draft_estimate)
-    )
+    if @project.hours_cap_kind_estimated? && @project.draft_estimate.blank?
+      flash[:error] = 'No draft estimate'
+    else
+      @project.tasks.create!(
+        task_params.merge(estimate: @project.draft_estimate)
+      )
+    end
+
     redirect_to @project
   end
 

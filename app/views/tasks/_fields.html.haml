@@ -15,7 +15,7 @@
   = f.select :state,
     options_for_select([['New', 'brand_new'], ['In Progress', 'in_progress'], ['Resolved', 'resolved'], ['Closed', 'closed']], f.object&.state)
 
-- if !(f.object.estimate_id.present? && f.object.estimate.status_active?)
+- if !(f.object&.estimate_id.present? && f.object.estimate.status_active?)
   .field
     = f.label :est_hours
     = f.text_field :est_hours
