@@ -11,9 +11,10 @@ class TasksController < AuthedController
     if @project.hours_cap_kind_estimated? && @project.draft_estimate.blank?
       flash[:error] = 'No draft estimate'
     else
-      @project.tasks.create!(
+      task = @project.tasks.create!(
         task_params.merge(estimate: @project.draft_estimate)
       )
+      flash[:success] = "Added task #{task.id}"
     end
 
     redirect_to @project

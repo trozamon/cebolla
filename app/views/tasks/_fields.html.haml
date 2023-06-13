@@ -17,5 +17,5 @@
 
 - if !(f.object&.estimate_id.present? && f.object.estimate.status_active?)
   .field
-    = f.label :est_hours
+    = f.label :est_hours, 'Estimated Hours'
     = f.text_field :est_hours
