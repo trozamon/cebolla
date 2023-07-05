@@ -11,4 +11,4 @@
   = f.text_field :phone
 
 = f.fields_for :address do |addr_form|
-  = render partial: 'shared/address/fields', locals: { f: addr_form }
+  = render partial: 'addresses/fields', locals: { f: addr_form }
