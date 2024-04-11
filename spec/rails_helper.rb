@@ -71,8 +71,12 @@ RSpec.configure do |config|
       login_as @user, scope: :user
     end
 
-    if example.metadata[:type] == :system && ENV['CHROME_HEADLESS'] != 'false'
-      driven_by :selenium, using: :headless_chrome
+    if example.metadata[:type] == :system
+      if ENV['HEADLESS'] == 'false'
+        driven_by :selenium, using: :firefox
+      else
+        driven_by :selenium, using: :headless_firefox
+      end
     end
 
     example.run
