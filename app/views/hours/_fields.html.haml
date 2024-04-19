@@ -1,11 +1,9 @@
-.required.field
+.fields
   = f.label :date
   = f.date_field :date
-
-.required.field
   = f.label :num
   = f.text_field :num
 
-.required.field
+.field
   = f.label :description
-  = f.text_area :description
+  = f.text_area :description, cols: 80, rows: 7

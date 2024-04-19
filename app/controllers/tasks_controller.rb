@@ -38,6 +38,10 @@ class TasksController < AuthedController
     change_state :resolved
   end
 
+  def show
+    @hour = @task.hours.new(date: Time.zone.today)
+  end
+
   def start
     change_state :in_progress
   end

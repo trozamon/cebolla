@@ -26,3 +26,7 @@
           %td= hour.date
           %td= hour.description
           %td= hour.num
+
+= form_with model: @hour, url: task_hours_path(task_id: @task.id), class: 'form' do |f|
+  = render partial: 'hours/fields', locals: { f: f }
+  = f.submit 'Record Time'
