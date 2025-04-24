@@ -7,21 +7,22 @@ class ProjectStatusPdf < BasePdf
   end
 
   def generate_body(pdf)
-    print_header(pdf, entity, date.to_s)
+    print_header(pdf, Entity.first, Time.zone.today.strftime('%B %-d, %Y'))
 
-    pdf.move_down P_SIZE * 2
+    pdf.move_down H1_SIZE
     pdf.font(FONT, size: H1_SIZE, style: :bold) do
       pdf.text "#{customer.name} Project Status", align: :center
     end
 
     pdf.move_down P_SIZE
-    print_summary_stats(pdf)
-    pdf.move_down P_SIZE
 
-    projects.each.with_index do |project, idx|
-      pdf.start_new_page if idx > 0
-      print_project(pdf, project)
-    end
+    print_summary_stats(pdf)
+    pdf.start_new_page
+
+    #projects.each.with_index do |project, idx|
+    #  pdf.start_new_page if idx > 0
+    #  print_project(pdf, project)
+    #end
   end
 
   private
@@ -60,11 +61,39 @@ class ProjectStatusPdf < BasePdf
 
   def print_summary_stats(pdf)
     pdf.font(FONT, size: H2_SIZE, style: :bold) do
-      pdf.text "Summary"
+      pdf.text 'Summary'
     end
 
-    pdf.text "Complete: #{customer.complete_unbilled_hours} hours"
-    pdf.text "Estimated Backlog: #{customer.estimated_backlog_hours} hours"
+    width = content_width(pdf) / 5.0
+
+    pdf.font(FONT, style: :bold) do
+      pdf.text 'Project'
+      pdf.text_box 'Description', at: [width, pdf.cursor + P_SIZE + 2], width: width*3 - P_SIZE
+      pdf.text_box 'Backlog Tasks', at: [width * 4.0, pdf.cursor + P_SIZE + 2], width: width - P_SIZE, align: :right
+    end
+
+    pdf.stroke { pdf.horizontal_rule }
+    pdf.move_down P_SIZE / 2
+
+    pdf.stroke_color 'bbbbbb'
+    projects.each.with_index do |proj, idx|
+      if idx > 0
+        pdf.stroke { pdf.horizontal_rule }
+        pdf.move_down P_SIZE / 2
+      end
+
+      pdf.text proj.name
+
+      desc_width = width*3 - P_SIZE
+      char_width = desc_width.to_f / P_SIZE.to_f * 2.0
+      desc_height = (proj.description.length.to_f/char_width).ceil - 1
+
+      pdf.text_box proj.description || '', at: [width, pdf.cursor + P_SIZE + 2], width: width*3 - P_SIZE
+      pdf.text_box proj.tasks.open.count.to_s, at: [width * 4.0, pdf.cursor + P_SIZE + 2], width: width - P_SIZE, align: :right
+
+      pdf.move_down P_SIZE*desc_height
+    end
+    pdf.stroke_color '000000'
   end
 
   def entity
@@ -72,8 +101,6 @@ class ProjectStatusPdf < BasePdf
   end
 
   def projects
-    tmp = customer.projects.active.order(:name).to_a
-
-    tmp.select { |p| p.tasks.open.any? }
+    @projects ||= customer.projects.active.order(:name).to_a
   end
 end

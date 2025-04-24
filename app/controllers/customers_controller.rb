@@ -26,8 +26,14 @@ class CustomersController < AuthedController
         @tmpfile = Tempfile.new("", nil, mode: File::CREAT | File::BINARY | File::RDWR, encoding: 'ASCII-8BIT')
         ProjectStatusPdf.new(@customer, date).generate(@tmpfile.path)
         @tmpfile.rewind
+
+        name = @customer.name
+                        .downcase
+                        .gsub(/(\s|,)+/, '-')
+                        .gsub('.', '')
+
         send_file @tmpfile,
-                  filename: "#{@customer.name.downcase.gsub(/\s/, '')}_#{date}.pdf",
+                  filename: "#{name}_#{date}.pdf",
                   disposition: 'inline',
                   type: 'application/pdf'
       end

@@ -1,8 +1,8 @@
 class BasePdf
-  FONT = 'Helvetica'
+  FONT = 'Times-Roman'
   DEFAULT_COLOR = '000000'
-  H1_SIZE = 18
-  H2_SIZE = 16
+  H1_SIZE = 24
+  H2_SIZE = 18
   H3_SIZE = 14
   P_SIZE = 12
   SMALL_SIZE = 8
@@ -22,7 +22,7 @@ class BasePdf
   protected
 
   def print_header(pdf, entity, right_text = nil)
-    pdf.font(FONT, size: H2_SIZE, style: :bold) do
+    pdf.font(FONT, size: H2_SIZE, weight: 700) do
       pdf.text entity.name
       if right_text
         pdf.text_box(right_text, at: [300, 720], width: 235, align: :right)
