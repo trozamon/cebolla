@@ -54,7 +54,7 @@ class InvoicesController < AuthedController
     invoice = Invoice.new(make_params)
     invoice.customer = cust
     invoice.entity = ent
-    invoice.due_date = invoice.date + 30.days
+    invoice.due_date = invoice.date + 20.days
     invoice.save! if persist
 
     projects = Project.where(customer: cust, entity: ent)
