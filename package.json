@@ -4,9 +4,9 @@
   "dependencies": {
     "@hotwired/stimulus": "^3.1.1",
     "@hotwired/stimulus-webpack-helpers": "^1.0.1",
-    "@rails/actioncable": "^6.0.0",
-    "@rails/activestorage": "^6.0.0",
-    "@rails/ujs": "^6.0.0",
+    "@rails/actioncable": "^7.0.0",
+    "@rails/activestorage": "^7.0.0",
+    "@rails/ujs": "^7.0.0",
     "@rails/webpacker": "^5",
     "turbolinks": "^5.2.0"
   },

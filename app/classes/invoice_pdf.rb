@@ -84,6 +84,7 @@ class InvoicePdf < BasePdf
     end
     pdf.move_down P_SIZE / 2
 
+    # TODO: N+1 bad loading here
     invoice.hours.map(&:task).uniq.each.with_index do |task, idx|
       if idx > 0
         pdf.move_down P_SIZE / 2
