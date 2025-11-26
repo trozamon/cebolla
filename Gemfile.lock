@@ -289,7 +289,6 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
-  tzinfo-data
   webdrivers
   webpacker (~> 4.0)
 
