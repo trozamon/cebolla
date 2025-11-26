@@ -24,12 +24,6 @@ group :development, :test do
   gem 'faker'
   gem 'factory_bot_rails'
   gem 'rspec-rails'
-
-  # static analyzers
-  gem 'brakeman', require: false
-  gem 'bundler-audit', require: false
-  gem 'haml_lint', require: false
-  gem 'rubocop', require: false
 end
 
 group :development do
