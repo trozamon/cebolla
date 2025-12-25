@@ -6,12 +6,12 @@ ruby '3.0.5'
 gem 'rails', '~> 7.0.0' # rails obvi
 gem 'devise' # authentication
 gem 'haml' # better templates
+gem 'importmap-rails'
 gem 'money-rails' # nice money handling
 gem 'pg' # database
 gem 'prawn' # PDF generation
 gem 'puma' # app server
 gem 'sass-rails', '>= 6' # Use SCSS for stylesheets
-gem 'webpacker', '~> 4.0' # Transpile app-like JavaScript
 gem 'turbolinks', '~> 5' # Fast navigation
 
 # Reduces boot times through caching; required in config/boot.rb
