@@ -8,7 +8,6 @@ gem 'devise' # authentication
 gem 'haml' # better templates
 gem 'money-rails' # nice money handling
 gem 'pg' # database
-gem 'pghero' # database analytics
 gem 'prawn' # PDF generation
 gem 'puma' # app server
 gem 'sass-rails', '>= 6' # Use SCSS for stylesheets

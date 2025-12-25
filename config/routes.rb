@@ -36,11 +36,4 @@ Rails.application.routes.draw do
     post :start, on: :member
     post :unstart, on: :member
   end
-
-  # TODO: limit this to admins, e.g. authenticate :user, -> (user) { user.admin? } do
-  authenticate :user do
-    namespace :admin do
-      mount PgHero::Engine, at: :pghero
-    end
-  end
 end
