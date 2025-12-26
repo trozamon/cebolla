@@ -9,7 +9,7 @@ form .field {
     font-weight: 700;
     margin-bottom: 0.4em;
 
-    &:after {
+    &::after {
       content: "\A";
       white-space: pre;
     }

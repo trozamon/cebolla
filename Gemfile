@@ -9,8 +9,8 @@ gem 'importmap-rails'
 gem 'money-rails' # nice money handling
 gem 'pg' # database
 gem 'prawn' # PDF generation
+gem 'propshaft' # asset pipeline
 gem 'puma' # app server
-gem 'sass-rails', '>= 6' # Use SCSS for stylesheets
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

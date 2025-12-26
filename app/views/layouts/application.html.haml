@@ -5,7 +5,11 @@
     = csrf_meta_tags
     = csp_meta_tag
 
-    = stylesheet_link_tag 'application', media: 'all'
+    = stylesheet_link_tag 'container', integrity: true
+    = stylesheet_link_tag 'flash', integrity: true
+    = stylesheet_link_tag 'form', integrity: true
+    = stylesheet_link_tag 'nav', integrity: true
+    = stylesheet_link_tag 'table', integrity: true
     = javascript_importmap_tags
 
   %body
@@ -20,7 +24,7 @@
     - if flash.any?
       .container
         - flash.each do |kind, messages|
-          %div{ class: "flash flash-#{kind}" }
+          %div{ class: "flash flash--#{kind}" }
             - if messages.is_a?(Array)
               %ul
                 - messages.each do |msg|
