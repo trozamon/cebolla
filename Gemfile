@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '3.2.9'
 
-gem 'rails', '~> 8.0.0' # rails obvi
+gem 'rails', '~> 8.1.0' # rails obvi
 gem 'devise' # authentication
 gem 'haml' # better templates
 gem 'importmap-rails'
