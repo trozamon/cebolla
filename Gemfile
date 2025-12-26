@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '3.2.9'
+ruby '3.3.10'
 
 gem 'rails', '~> 8.1.0' # rails obvi
 gem 'devise' # authentication
