@@ -34,6 +34,10 @@ class TasksController < AuthedController
     @tasks = Task.where('state IN (1, 2, 3) OR updated_at > ?', 1.week.ago)
   end
 
+  def new
+    @task = Task.new(project: @project)
+  end
+
   def resolve
     change_state :resolved
   end

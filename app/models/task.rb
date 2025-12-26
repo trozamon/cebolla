@@ -10,12 +10,12 @@ class Task < ApplicationRecord
 
   scope :open, -> { where.not(state: :closed) }
 
-  enum kind: {
+  enum :kind, {
     bug: 1,
     feature: 2
   }
 
-  enum state: {
+  enum :state, {
     brand_new: 1,
     in_progress: 2,
     resolved: 3,

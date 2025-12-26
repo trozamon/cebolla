@@ -13,10 +13,10 @@ class Estimate < ApplicationRecord
   validates :status, presence: true
   validate :project_is_estimated
 
-  enum status: {
+  enum :status, {
     draft: 1,
     active: 2
-  }, _prefix: :status
+  }, prefix: true
 
   def proper_name
     if number == 0 && status_draft?

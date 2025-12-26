@@ -10,21 +10,21 @@ class Project < ApplicationRecord
   validate :ad_hoc_config, if: :hours_cap_kind_ad_hoc?
   validate :estimated_config, if: :hours_cap_kind_estimated?
 
-  enum billing: {
+  enum :billing, {
     monthly: 1,
     lump_sum: 2
-  }, _prefix: :billing
+  }, prefix: true
 
-  enum hours_cap_kind: {
+  enum :hours_cap_kind, {
     ad_hoc: 1,
     estimated: 2
-  }, _prefix: :hours_cap_kind
+  }, prefix: true
 
-  enum status: {
+  enum :status, {
     active: 1,
     draft: 2,
     completed: 3
-  }, _prefix: :status
+  }, prefix: true
 
   monetize :default_hourly_rate_cents, allow_nil: true
 
