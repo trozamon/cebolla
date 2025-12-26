@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.5'
+ruby '3.2.9'
 
 gem 'rails', '~> 7.1.0' # rails obvi
 gem 'devise' # authentication
