@@ -12,7 +12,6 @@ gem 'pg' # database
 gem 'prawn' # PDF generation
 gem 'puma' # app server
 gem 'sass-rails', '>= 6' # Use SCSS for stylesheets
-gem 'turbolinks', '~> 5' # Fast navigation
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

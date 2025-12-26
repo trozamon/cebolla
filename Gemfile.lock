@@ -268,9 +268,6 @@ GEM
     tilt (2.0.11)
     timeout (0.4.4)
     ttfunk (1.7.0)
-    turbolinks (5.2.1)
-      turbolinks-source (~> 5.2)
-    turbolinks-source (5.2.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     warden (1.2.9)
@@ -310,7 +307,6 @@ DEPENDENCIES
   selenium-webdriver
   spring
   spring-watcher-listen
-  turbolinks (~> 5)
   webdrivers
 
 RUBY VERSION
