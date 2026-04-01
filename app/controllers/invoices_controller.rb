@@ -19,6 +19,7 @@ class InvoicesController < AuthedController
   def post
     @invoice = Invoice.find(params[:id])
     @invoice.update!(posted_at: Time.zone.now)
+    flash[:success] = "Posted invoice #{@invoice.number}"
     redirect_to invoice_path(@invoice)
   end
 

@@ -5,8 +5,9 @@
 %p Date: #{@invoice.date}
 %p Due Date: #{@invoice.due_date}
 
-- unless @invoice.posted?
-  = link_to 'Post', post_invoice_path(@invoice), class: 'ui button', method: :post
+- if !@invoice.posted?
+  = form_with url: post_invoice_path(@invoice) do |f|
+    = f.submit 'Post'
 
 = render partial: 'line_items', locals: { invoice: @invoice }
 
